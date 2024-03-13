@@ -200,7 +200,8 @@ exports.createUser = async (req, res) => {
     naissance: req.body.naissance,
     telephone: req.body.telephone,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    role_id: req.body.role_id
   };
 
   // Save User in the database
@@ -228,7 +229,7 @@ exports.findAllUsers = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Users."
+          "Some error occurred while retrieving Users."
       });
     });
 };
@@ -469,7 +470,9 @@ exports.createCmd = (req, res) => {
     user_id: req.body.user_id,
     restaurant_id: req.body.restaurant_id,
     date: req.body.date,
-    status: req.body.status
+    status: req.body.status,
+    user_id: req.body.user_id,
+    restaurant_id: req.body.restaurant_id
   };
 
   // Save command in the database
@@ -605,7 +608,8 @@ exports.createMenu = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    catMenu_id: req.body.catMenu_id
+    catMenu_id: req.body.catMenu_id,
+    restaurant_id: req.body.restaurant_id
   };
 
   // Save menu in the database
@@ -739,8 +743,7 @@ exports.createOrder = (req, res) => {
   // Create a order
   const order = {
     menu_id: req.body.menu_id,
-    cmd_id: req.body.cmd_id,
-    quantity: req.body.quantity
+    cmd_id: req.body.cmd_id
   };
 
   // Save order in the database
@@ -875,7 +878,7 @@ exports.createTable = (req, res) => {
   const table = {
     restaurant_id: req.body.restaurant_id,
     number: req.body.number,
-    place: req.body.place
+    capacite: req.body.capacite
   };
 
   // Save table in the database
@@ -1009,8 +1012,8 @@ exports.createRestaurant = (req, res) => {
   // Create a restaurant
   const restaurant = {
     name: req.body.name,
-    address: req.body.address,
-    phone: req.body.phone
+    adresse: req.body.adresse,
+    telephone: req.body.telephone
   };
 
   // Save restaurant in the database
@@ -1278,7 +1281,6 @@ exports.createReview = (req, res) => {
   const review = {
     user_id: req.body.user_id,
     restaurant_id: req.body.restaurant_id,
-    note: req.body.note,
     comment: req.body.comment
   };
 

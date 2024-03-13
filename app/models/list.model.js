@@ -85,6 +85,9 @@ module.exports = (sequelize, Sequelize) => {
         catMenu_id: {
             type: DataTypes.INTEGER,
         },
+        restaurant_id: {
+            type: DataTypes.INTEGER,
+        }
     });
 
     const Order = sequelize.define("orderContent", {
@@ -107,7 +110,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        tableNum: {
+        number: {
             type: DataTypes.INTEGER
         },
         capacite: {
@@ -132,11 +135,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         telephone: {
             type: DataTypes.STRING,
-        },
-        menu_id: {
-            type: DataTypes.INTEGER,
-            // constraints: false
-        },
+        }
     });
 
     const Role = sequelize.define("roles", {
@@ -145,7 +144,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        nom: {
+        name: {
             type: Sequelize.STRING
         },
     });
@@ -156,7 +155,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        uesr_id: {
+        user_id: {
             type: DataTypes.INTEGER
         },
         restaurant_id: {
@@ -173,8 +172,8 @@ module.exports = (sequelize, Sequelize) => {
     Cmd.hasMany(Order, { foreignKey: 'cmd_id' });
     Order.belongsTo(Cmd, { foreignKey: 'cmd_id' });
 
-    User.hasOne(Role);
-    Role.belongsTo(User, { foreignKey: 'role_id' });
+    Role.hasMany(User, { foreignKey: 'role_id' });
+    User.belongsTo(Role, { foreignKey: 'role_id' });
 
     User.hasMany(Review, { foreignKey: 'user_id' });
     Review.belongsTo(User, { foreignKey: 'user_id' });
